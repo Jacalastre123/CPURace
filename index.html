@@ -270,7 +270,7 @@
              money -= 15
             price += priceInc * multip
             priceID.innerText = "Price: $" + price
-            button.innerText = "Price: +$" + price * multip + " ($15)"
+            button.innerText = "Price: +$" + priceInc * multip + " ($15)"
         }
             break;
 
@@ -278,7 +278,7 @@
         if ( money >= 75) {
              money -= 75
             copied += copInc * multip
-             copies.innerText = "Copies: " + copied + " ($75)"
+             copies.innerText = "Copies: " + copied
                button.innerText = "Copies: " + copInc * multip + " ($75)"
         }
             break;

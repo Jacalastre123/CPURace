@@ -109,7 +109,7 @@
         <button onclick="changeCPU(this)" data-type="price" id="priceBut">Price: +$10 ($15)</button>
         <button onclick="changeCPU(this)" data-type="copies" id="copBut">Copies: +20 ($75)</button>
         <div class="extra">
-        <button onclick="changeCPU(this)" data-type="levelUp">Prestige: 0 ($9000)</button>
+        <button onclick="changeCPU(this)" data-type="levelUp">Prestige: 0 ($8000)</button>
         <button onclick="submit(this)">Submit</button>
         </div>
     </div>
@@ -289,7 +289,7 @@
             prestige += 1
              copies.innerText = "Prestige: " + prestige 
              multip++
-            button.innerText = "Prestige: " + prestige + " ($" + prestigeCost + ")"
+            button.innerText = "Prestige: " + prestige + " ($" + prestigeCost * multip + ")"
                copBut.innerText = "Copies: " + copInc * multip + " ($75)"
                  priceBut.innerText = "Price: +$" + price * multip + " ($15)"
                 l3b.innerText = "L3 Cache: +" + l3Inc * multip + "mb ($125)"
@@ -302,7 +302,7 @@
         
             break;
     }
-    score = (((Ghz * core) / ( nano / 1000)) + (l1c * 2 + l2c * 1.5 + l3c * 1.25) * 3 ) / (price / 100)
+    score = Math.abs((((Ghz * core) / ( nano / 1000)) + (l1c * 2 + l2c * 1.5 + l3c * 1.25) * 3 ) / (price / 100))
      benchmark.innerText = "CPU Score: " + score
 }  
            

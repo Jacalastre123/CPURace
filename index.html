@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPU Sim</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lexend:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100..900;1,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            text-align: center;
+            font-family: lexend;
+            background-color: rgb(34, 193, 246);
+        }
+
+        button {
+            background-color: white;
+
+
+        }
+
+        button:hover {
+            background-color: rgb(163, 160, 160);
+            transform: scale(1.1)
+            
+        }
+
+        .buttons{
+            display: grid;
+            grid-template-columns: 20vh 40vh 30vh 10vh;
+            grid-template-rows: 10vh 7.5vh 7.5vh;
+            
+          
+        }
+
+        .buttons button {
+            background-color: rgba(214, 213, 213, 0.761);
+        }
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5em;
+        }
+        nav h3 {
+            border: 1px solid black;
+            padding: 5px;
+            background-color: rgba(206, 206, 206, 0.761);
+            border-radius: 10px;
+        }
+
+        .extra {
+      
+            display: flex;
+            width: 100vh;
+        }
+
+        .extra button {
+            flex: 1;
+            background-color: rgba(182, 182, 182, 0.761)
+        }
+
+        .specs {
+            background-color: rgba(81, 80, 80, 0.525);
+        }
+
+        #CPUName {
+            background-color: rgba(71, 69, 69, 0.5);
+            border-radius: 5px;
+        }
+        
+    </style>
+</head>
+<body>
+    <header>
+    <h1>100 Year CPU Race</h1>
+    <h5>Beat Moores Law by 2100! All upgrades beside copies with increase or decrease your CPU Score, beat the expected or if CPUs follow Moores Law for all eternity! If you got less, you will only get a fifth of the sale, equal, half and more, exact amount of sales with is made by the formula (copies sold x price). Good Luck</h5>
+    <nav>
+    <h3 id="year">Year: 2000</h3>
+    <h3 id="average">Expected Score: 200</h3>
+    <h3 id="money">$1000</h3>
+    <h3 id="benchmark">CPU Score: 97</h3>
+    </nav>
+
+    </header>
+    <div id="cpuCont">
+        <img id="cpu">
+        <h3 id="CPUName">My CPU</h3>
+        <ul class="specs">
+            <li id="speed"></li>
+            <li id="nm"></li>
+            <li id="core"></li>
+            <li id="l1"></li>
+            <li id="l2"></li>
+            <li id="l3"></li>
+            <li id="copies"></li>
+          <li id="price"></li>
+        </ul>
+    </div>
+    <div>
+        <div class="buttons">
+        <button onclick="changeCPU(this)" data-type="clock" id="clocks">Clock Speed: +20MHz ($120)</button>
+        <button onclick="changeCPU(this)" data-type="nm" id="tp">Technical Process: -50nm ($800)</button>
+        <button onclick="changeCPU(this)" data-type="core" id="corBut">+1 Core ($1000)</button>
+        <button onclick="changeCPU(this)" data-type="l1Cache" id="l1b">L1 Cache: +1mb ($200)</button>
+        <button onclick="changeCPU(this)" data-type="l2Cache" id="l2b">L2 Cache: +1mb ($150)</button>
+        <button onclick="changeCPU(this)" data-type="l3Cache" id="l3b">L3 Cache: +1mb ($125)</button>
+        <button onclick="changeCPU(this)" data-type="price" id="priceBut">Price: +$10 ($15)</button>
+        <button onclick="changeCPU(this)" data-type="copies" id="copBut">Copies: +20 ($75)</button>
+        <div class="extra">
+        <button onclick="changeCPU(this)" data-type="levelUp">Prestige: 0 ($9000)</button>
+        <button onclick="submit(this)">Submit</button>
+        </div>
+    </div>
+    </div>
+    <dialog id="dial">
+        <h1 id="title">You WON!</h1>
+        <h3>Here is your cpu:</h3>
+        <div class="specs">
+            <p id="winCPU"></p>
+            <p id="winTP"></p>
+            <p id="winCo"></p>
+            <p id="winl1"></p>
+            <p id="winl2"></p>
+            <p id="winl3"></p>
+        </div>
+        <h2 id="winScore">Score: </h2>
+        <h2 id="expected">Expected: </h2>
+<button onclick="windosw.location.reload()">Close and retry</button>
+    </dialog>
+    <script>
+        let Ghz = 10
+        let nano = 2000
+        let core = 1
+        let l1c = 1
+        let l2c = 1
+        let l3c = 1
+        let price = 10
+        let money = 1000
+        let averages = 200
+        let copied = 20
+        let multip = 1
+        let prestige = 0
+        let years = 2000
+        let prestigeCost = 8000
+        let GhzInc = 20
+        let TPinc = 50
+        let CInc = 1
+        let l1Inc = 1
+        let l2Inc = 1
+        let l3Inc = 1
+        let priceInc = 10
+        let copInc = 20
+        let score = (((Ghz * core) / ( nano / 1000)) + (l1c * 2 + l2c * 1.5 + l3c * 1.25) * 3 ) / (price / 100)
+        
+        const speed = document.getElementById("speed")
+        const clocks = document.getElementById("clocks")
+        const tp = document.getElementById("tp")
+        const corBut = document.getElementById("corBut")
+        const l1b = document.getElementById("l1b")
+        const l2b = document.getElementById("l2b")
+        const l3b = document.getElementById("13b")
+        const priceBut = document.getElementById("priceBut")
+        const copBut = document.getElementById("copBut")
+       const coreId = document.getElementById("core")
+         const nm = document.getElementById("nm")
+          const l1 = document.getElementById("l1")
+           const l2 = document.getElementById("l2")
+            const l3 = document.getElementById("l3")
+            const average = document.getElementById("average")
+            const year = document.getElementById("year")
+        const moneyID = document.getElementById("money")
+            const priceID = document.getElementById("price")
+                const copies = document.getElementById("copies")
+                   const dial = document.getElementById("dial")
+                    const winCPU = dial.querySelector("#winCPU")
+                    const winTP = dial.querySelector("#winTP")
+                    const winCo = dial.querySelector("#winCo")
+                    const winl1 = dial.querySelector("#winl1")
+                       const winl2 = dial.querySelector("#winl2")
+                          const winl3 = dial.querySelector("#winl3")
+                     const title = dial.querySelector("#title")
+                     const winScore = dial.querySelector("#winScore")
+                     const expected = dial.querySelector("#expected")
+            const benchmark = document.getElementById("benchmark")
+            
+        speed.innerText = "Speed: " + Ghz + "MHz"
+        nm.innerText = "Technical Process: " + nano + "nm"
+        coreId.innerText = "Cores: " + core 
+        l1.innerText = "L1 cache: " + l1c + "mb"
+        l2.innerText = "L2 cache: " + l2c + "mb"
+        l3.innerText = "L3 cache: " + l3c + "mb"
+       priceID.innerText = "Price: $" + price
+       copies.innerText = "Copies: " + copied  
+
+       benchmark.innerText = "CPU Score: " + Math.floor(score)
+        document.addEventListener("click", () => {
+            console.log(score)
+            average.innerText = "Expected Score: " + Math.floor(averages)
+            moneyID.innerText = "$" + money
+            benchmark.innerText = "CPU Score: " + Math.floor(score)
+        })
+
+        function changeCPU(button) {
+            switch(button.dataset.type) {
+                case "clock":
+                if (money >= 120) {
+                     money -= 120
+             Ghz += GhzInc * multip
+                button.innerText = "Clock Speed: " + GhzInc * multip + "MHz ($120)"
+            if (Ghz >= 1000) {
+             speed.innerText = "Speed: " + Ghz / 1000 + "GHz"
+            
+            }
+
+            else {
+            speed.innerText = "Speed: " + Ghz + "MHz"
+
+            }
+        }
+            break;
+            case "nm": 
+            if (money >= 800) {
+                 money -= 800
+             nano -= TPinc * multip
+            nm.innerText = "Technical Process: " +  nano + "nm"
+            button.innerText = "Technical Process: -" + TPinc * multip + "nm ($800)"
+            }
+            break;
+
+            case "core":
+                if (money >= 1000) {
+                money -= 1000 
+             core += CInc * multip
+              coreId.innerText = "Cores: " + core 
+              button.innerText = "+" + CInc * multip + " Cores ($1000)"
+                }
+              break;
+
+            case "l1Cache": 
+            if (money >= 180) {
+                  money -= 180 
+            l1c += l1Inc * multip
+             l1.innerText = "L1 cache: " + l1c + "mb"
+             button.innerText = "L1 Cache: +" + l1Inc * multip + "mb ($200)"
+            }
+             break;
+
+            case "l2Cache": 
+            if (money >= 150){
+               money -= 150
+            l2c += l2Inc * multip
+            l2.innerText = "L2 cache: " + l2c + "mb"
+            button.innerText = "L2 Cache: +" + l2Inc * multip + "mb ($150)"
+            }
+        break;
+
+        case "l3Cache":
+            if (money >= 125) {
+              money -= 125
+            l3c += l3Inc * multip
+            l3.innerText = "L3 cache: " + l3c + "mb"
+            button.innerText = "L3 Cache: +" + l3Inc * multip + "mb ($125)"
+            }
+            break;
+
+        case "price": 
+        if ( money >= 15) {
+             money -= 15
+            price += priceInc * multip
+            priceID.innerText = "Price: $" + price
+            button.innerText = "Price: +$" + price * multip + " ($15)"
+        }
+            break;
+
+    case "copies": 
+        if ( money >= 75) {
+             money -= 75
+            copied += copInc * multip
+             copies.innerText = "Copies: " + copied + " ($75)"
+               button.innerText = "Copies: " + copInc * multip + " ($75)"
+        }
+            break;
+
+        case "levelUp": 
+        if (money >= 8000) {
+             money -= 8000
+            prestige += 1
+             copies.innerText = "Prestige: " + prestige 
+             multip++
+            button.innerText = "Prestige: " + prestige + " ($" + prestigeCost + ")"
+               copBut.innerText = "Copies: " + copInc * multip + " ($75)"
+                 priceBut.innerText = "Price: +$" + price * multip + " ($15)"
+                l3b.innerText = "L3 Cache: +" + l3Inc * multip + "mb ($125)"
+                l2b.innerText = "L2 Cache: +" + l2Inc * multip + "mb ($150)"
+                l1b.innerText = "L1 Cache: +" + l1Inc * multip + "mb ($200)"
+                corBut.innerText = "+" + CInc * multip + " Cores ($1000)"
+                tp.innerText = "Technical Process: -" + TPinc * multip + "nm ($800)"
+                clocks.innerText = "Clock Speed: " + Ghz * multip + "MHz ($120)"
+            }
+        
+            break;
+    }
+    score = (((Ghz * core) / ( nano / 1000)) + (l1c * 2 + l2c * 1.5 + l3c * 1.25) * 3 ) / (price / 100)
+     benchmark.innerText = "CPU Score: " + score
+}  
+           
+
+    
+    
+
+    
+
+
+         
+
+        function submit(button) {
+    
+            averages *= 1.20
+            let sold = copied
+            average.innerText = averages
+            if (score < averages) {
+                sold /= 5
+                button.style.backgroundColor = "red"
+            }
+            else if (score === averages) {
+                sold /= 2
+                button.style.backgroundColor = "yellow"
+            }
+
+            else if (score > averages) {
+                sold = copied
+                button.style.backgroundColor = "lime"
+            } 
+
+            let inter = setTimeout(function() {
+                button.style.backgroundColor = "rgba(206, 206, 206, 0.761)"
+            }, 2000)
+            money += sold * price
+            moneyID.innerText = "$" + money
+            years++
+            if (years === 2100) {
+                dial.showModal()
+                 if (score < averages) {
+                title.innerText = "You lost"
+                
+
+            }
+        
+
+            else if (score >= averages) {
+                 title.innerText = "You Won"
+              
+            } 
+              winCPU.innerText = GhzInc + "MHz Speed"
+                winTP.innerText = nano + "nm Technical Process"
+
+            winCo.innerText = core + " Cores"
+            winl1.innerText = "L1 Cache: " + l1c + "mb"
+            winl2.innerText = "L2 Cache: " + l2c + "mb"
+            winl3.innerText = "L3 Cache: " + l3c + "mb"
+            winScore.innerText = "CPU Score: " + Math.floor(score)
+            expected.innerText - "Expected Score: " + averages
+            }
+            year.innerText = "Year: " + years
+        }
+    
+    </script>
+</body>
+</html>

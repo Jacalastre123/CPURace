@@ -138,7 +138,7 @@
         let l3c = 1
         let price = 10
         let money = 1000
-        let averages = 200
+        let averages = 150
         let copied = 20
         let multip = 1
         let prestige = 0
@@ -152,7 +152,7 @@
         let l3Inc = 1
         let priceInc = 10
         let copInc = 20
-        let score = ((((Ghz * core)) + (l1c * 1.9 + l2c * 1.4 + l3c * 1.20) * 3 ) / (price / 100)) - nano / 50
+        let score = ((((Ghz * core)) + (l1c * 1.9 + l2c * 1.4 + l3c * 1.20) * 3 ) / (price / 100)) - nano / 100
         
         const speed = document.getElementById("speed")
         const clocks = document.getElementById("clocks")
@@ -302,7 +302,7 @@
         
             break;
     }
-    score = Math.abs(((((Ghz * core)) + (l1c * 1.9 + l2c * 1.4 + l3c * 1.20) * 3 ) / (price / 100)) - nano / 75)
+    score = Math.abs(((((Ghz * core)) + (l1c * 1.9 + l2c * 1.4 + l3c * 1.20) * 3 ) / (price / 100)) - nano / 100)
      benchmark.innerText = "CPU Score: " + score
 }  
            

@@ -160,7 +160,7 @@
         const corBut = document.getElementById("corBut")
         const l1b = document.getElementById("l1b")
         const l2b = document.getElementById("l2b")
-        const l3b = document.getElementById("13b")
+        const l3b = document.getElementById("l3b")
         const priceBut = document.getElementById("priceBut")
         const copBut = document.getElementById("copBut")
        const coreId = document.getElementById("core")
@@ -193,13 +193,18 @@
         l3.innerText = "L3 cache: " + l3c + "mb"
        priceID.innerText = "Price: $" + price
        copies.innerText = "Copies: " + copied  
-
+      average.innerText = "Expected Score: " + Math.floor(averages)
+            moneyID.innerText = "$" + money
+        
        benchmark.innerText = "CPU Score: " + Math.floor(score)
         document.addEventListener("click", () => {
-            console.log(score)
-            average.innerText = "Expected Score: " + Math.floor(averages)
+            
+      average.innerText = "Expected Score: " + Math.floor(averages)
             moneyID.innerText = "$" + money
-            benchmark.innerText = "CPU Score: " + Math.floor(score)
+        
+       benchmark.innerText = "CPU Score: " + Math.floor(score)
+        
+           
         })
 
         function changeCPU(button) {
@@ -284,14 +289,14 @@
             break;
 
         case "levelUp": 
-        if (money >= 8000) {
-             money -= 8000
+        if (money >= prestigeCost * multip) {
+             money -= prestigeCost * multip
             prestige += 1
              copies.innerText = "Prestige: " + prestige 
              multip++
             button.innerText = "Prestige: " + prestige + " ($" + prestigeCost * multip + ")"
                copBut.innerText = "Copies: " + copInc * multip + " ($75)"
-                 priceBut.innerText = "Price: +$" + price * multip + " ($15)"
+                 priceBut.innerText = "Price: +$" + priceInc * multip + " ($15)"
                 l3b.innerText = "L3 Cache: +" + l3Inc * multip + "mb ($125)"
                 l2b.innerText = "L2 Cache: +" + l2Inc * multip + "mb ($150)"
                 l1b.innerText = "L1 Cache: +" + l1Inc * multip + "mb ($200)"
